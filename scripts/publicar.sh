@@ -24,7 +24,9 @@ echo
 
 git add -A
 git commit -q -m "$MSG"
-git push -q origin main
+# GIT_TERMINAL_PROMPT=0: se a credencial expirar, falha na hora com erro claro
+# em vez de travar esperando usuário e senha num terminal sem teclado.
+GIT_TERMINAL_PROMPT=0 git push origin main
 
 echo "Publicado. Em ~1 minuto: https://raulvirgylio.github.io/portfolio/"
 echo "Se não atualizar, force o recarregamento com Ctrl+F5."
