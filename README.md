@@ -133,20 +133,23 @@ usados só pela triagem. As marcações já confirmadas vêm pré-carregadas na 
 
 ## Publicar no GitHub Pages
 
+**Já está no ar:** <https://raulvirgylio.github.io/portfolio/>
+Repositório: <https://github.com/raulvirgylio/portfolio>
+
+Pra publicar qualquer mudança (triagem nova, foto, contato):
+
 ```
-git init
-git add .
-git commit -m "portfolio raulzito"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/portfolio.git
-git push -u origin main
+bash scripts/publicar.sh "o que mudou"
 ```
 
-No GitHub: **Settings → Pages → Source: Deploy from a branch → main / (root) → Save**.
-Em ~1 minuto o site fica em `https://SEU-USUARIO.github.io/portfolio/`.
+Ele mostra o que vai subir, commita e dá push. O site atualiza sozinho em ~1 minuto.
+O token do GitHub já está salvo no `credential.helper store` do git, então não pede senha.
 
-O arquivo `.nojekyll` já está aqui pra evitar que o Jekyll atrapalhe.
-A `triagem.html` também vai junto — se não quiser ela pública, apague antes de publicar.
+Na mão, se preferir:
+
+```
+git add -A && git commit -m "mensagem" && git push
+```
 
 ## Atualizar o catálogo quando a TV publicar vídeos novos
 
