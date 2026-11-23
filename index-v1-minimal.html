@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Raulzito — Videomaker · Editor · Cinegrafista</title>
+<meta name="description" content="Portfólio de Raulzito: videomaker, editor e cinegrafista. Programas de TV, documentários, coberturas de evento e conteúdo institucional na Bahia.">
+<meta property="og:title" content="Raulzito — Videomaker">
+<meta property="og:description" content="Programas de TV, documentários, coberturas e institucionais.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#trabalhos">Pular para os trabalhos</a>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#"><span>Raulzito</span></a>
+    <nav>
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <p class="kicker">Videomaker · Editor · Cinegrafista — Bahia, Brasil</p>
+    <h1>Gravo e monto programas de TV,<br>documentários e coberturas de evento.</h1>
+    <p class="lede">Rodo em locação, sem roteiro travado: entrevista, povo-fala, b-roll e transmissão ao vivo.
+    Finalizo em DaVinci Resolve. Abaixo está o que já foi ao ar.</p>
+    <dl class="facts">
+      <div><dt>Programas</dt><dd id="f-cats">—</dd></div>
+      <div><dt>Peças publicadas</dt><dd id="f-total">—</dd></div>
+      <div><dt>Horas no ar</dt><dd id="f-horas">—</dd></div>
+    </dl>
+  </div>
+</section>
+
+<main id="trabalhos" class="wrap">
+  <div class="toolbar">
+    <h2>Trabalhos</h2>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="loadmore-wrap"><button id="loadmore" class="btn">Ver mais</button></p>
+</main>
+
+<section id="sobre" class="band">
+  <div class="wrap about">
+    <div class="about-txt">
+      <h2>Sobre</h2>
+      <p>Me chamo Raul — todo mundo me conhece como Raulzito. Trabalho viajando: chego na cidade,
+      levanto a pauta no lugar, gravo entrevista e b-roll, e volto pra ilha de edição com o programa inteiro na mochila.</p>
+      <p>Fui responsável por gravação, direção de imagem e edição de programas exibidos na
+      <strong>TV Conexões — A Estação do Saber</strong>, além de institucionais, vinhetas e conteúdo
+      para redes da marca <strong>VEM COMIGO Travel</strong>.</p>
+      <ul class="skills">
+        <li>Captação em locação (entrevista, povo-fala, b-roll)</li>
+        <li>Edição e finalização — DaVinci Resolve e CapCut</li>
+        <li>Transmissão ao vivo e cobertura de evento</li>
+        <li>Vinhetas, tarjas e pacote gráfico</li>
+        <li>Correção de cor e tratamento de áudio</li>
+      </ul>
+    </div>
+    <figure class="about-foto">
+      <img src="assets/raulzito.jpg" alt="Raulzito em locação" onerror="this.closest('figure').classList.add('vazio')">
+      <figcaption>Troque por uma foto sua em assets/raulzito.jpg</figcaption>
+    </figure>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="wrap contato">
+    <div>
+      <h2>Vamos gravar?</h2>
+      <p class="lede">Orçamento de diária, cobertura de evento ou edição avulsa.</p>
+    </div>
+    <ul class="links">
+      <li><a id="lk-wa" href="#" data-ph="WhatsApp">WhatsApp</a></li>
+      <li><a id="lk-ig" href="#" data-ph="Instagram">Instagram</a></li>
+      <li><a id="lk-mail" href="#" data-ph="E-mail">E-mail</a></li>
+      <li><a href="https://www.youtube.com/@TVCONEXOESAESTACAODOSABER" target="_blank" rel="noopener">Canal TV Conexões</a></li>
+    </ul>
+  </div>
+  <div class="wrap copy"><span>© <span id="ano"></span> Raulzito · Videomaker</span></div>
+</footer>
+
+<dialog id="player">
+  <button class="fechar" aria-label="Fechar">✕</button>
+  <div class="frame"><iframe id="iframe" title="Player" allow="accelerometer;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
+  <p class="player-tit" id="player-tit"></p>
+</dialog>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
