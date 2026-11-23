@@ -103,9 +103,70 @@ async function carregar() {
   // foto do "sobre mim": caminho vem do perfil.json, então basta trocar o arquivo
   const img = $("#foto-sobre");
   if (img && perfil.foto) img.src = perfil.foto;
-  $("#f-total").textContent = videos.length || "—";
-  $("#f-cats").textContent = Math.max(categorias().length - 1, 0) || "—";
   pintarFiltros(); pintarGrade(); pintarContato();
+}
+
+/* ===================== FOTOS ===================== */
+const PAGE_FOTOS = 15;
+let fotos = [], filtroFoto = "Todas", mostrandoFotos = PAGE_FOTOS, fotoAtual = 0;
+
+function categoriasFoto() {
+  const c = [...new Set(fotos.map(f => f.categoria).filter(Boolean))];
+  return ["Todas", ...c.sort()];
+}
+function listaFotos() {
+  return filtroFoto === "Todas" ? fotos : fotos.filter(f => f.categoria === filtroFoto);
+}
+function caminhoFoto(f, mini) {
+  const p = mini && f.mini ? f.mini : f.arquivo;
+  return encodeURI(String(p));
+}
+
+function pintarFiltrosFoto() {
+  const alvo = $("#filtros-fotos");
+  const cats = categoriasFoto();
+  if (cats.length <= 2) { alvo.innerHTML = ""; return; }   // 1 categoria só: filtro não serve
+  alvo.innerHTML = cats.map(c =>
+    `<button data-c="${esc(c)}" aria-pressed="${c === filtroFoto}">${esc(c)}</button>`).join("");
+  alvo.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    filtroFoto = b.dataset.c; mostrandoFotos = PAGE_FOTOS; pintarFiltrosFoto(); pintarFotos();
+  }));
+}
+
+function pintarFotos() {
+  const l = listaFotos(), vis = l.slice(0, mostrandoFotos);
+  $("#grid-fotos").innerHTML = vis.map((f, i) => `
+    <button class="foto" data-i="${i}">
+      <span class="canto c1"></span><span class="canto c2"></span>
+      <span class="canto c3"></span><span class="canto c4"></span>
+      <img loading="lazy" src="${caminhoFoto(f, true)}" alt="${esc(f.legenda || "")}">
+      ${f.legenda ? `<span class="legenda">${esc(f.legenda)}</span>` : ""}
+    </button>`).join("");
+  $("#loadmore-fotos").hidden = mostrandoFotos >= l.length;
+  $("#grid-fotos").querySelectorAll(".foto").forEach(b =>
+    b.addEventListener("click", () => abrirFoto(Number(b.dataset.i))));
+}
+
+function abrirFoto(i) {
+  const l = listaFotos();
+  if (!l.length) return;
+  fotoAtual = (i + l.length) % l.length;
+  const f = l[fotoAtual];
+  $("#foto-grande").src = caminhoFoto(f, false);
+  $("#foto-grande").alt = f.legenda || "";
+  $("#foto-legenda").textContent = [f.legenda, f.local].filter(Boolean).join(" — ");
+  if (!$("#lightbox").open) $("#lightbox").showModal();
+}
+function fecharFoto() { $("#lightbox").close(); $("#foto-grande").src = ""; }
+
+async function carregarFotos() {
+  const f = await fetch("data/fotos.json").then(r => r.ok ? r.json() : []).catch(() => []);
+  fotos = Array.isArray(f) ? f.filter(x => x && x.arquivo) : [];
+  // sem fotos, a aba inteira some em vez de mostrar seção vazia
+  if (!fotos.length) return;
+  $("#fotos").hidden = false;
+  $("#nav-fotos").hidden = false;
+  pintarFiltrosFoto(); pintarFotos();
 }
 
 /* Contador de visitas estilo web 1.0.
@@ -124,9 +185,20 @@ function pintarContador() {
 }
 
 $("#loadmore").addEventListener("click", () => { mostrando += PAGE; pintarGrade(); });
+$("#loadmore-fotos").addEventListener("click", () => { mostrandoFotos += PAGE_FOTOS; pintarFotos(); });
 $("#player .fechar").addEventListener("click", fechar);
 $("#player").addEventListener("close", () => { $("#iframe").src = ""; });
 $("#player").addEventListener("click", e => { if (e.target.id === "player") fechar(); });
+$("#lightbox .fechar").addEventListener("click", fecharFoto);
+$("#lightbox .ant").addEventListener("click", e => { e.stopPropagation(); abrirFoto(fotoAtual - 1); });
+$("#lightbox .prox").addEventListener("click", e => { e.stopPropagation(); abrirFoto(fotoAtual + 1); });
+$("#lightbox").addEventListener("click", e => { if (e.target.id === "lightbox") fecharFoto(); });
+document.addEventListener("keydown", e => {
+  if (!$("#lightbox").open) return;
+  if (e.key === "ArrowLeft") abrirFoto(fotoAtual - 1);
+  if (e.key === "ArrowRight") abrirFoto(fotoAtual + 1);
+});
 $("#ano").textContent = new Date().getFullYear();
 pintarContador();
 carregar();
+carregarFotos();

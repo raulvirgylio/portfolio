@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Adicionar ao portfólio — Raulzito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --breu:#07100e;--madeira:#13211c;--madeira-2:#192a23;--vela:#f0dcae;--osso:#c3b596;
+  --poeira:#8a7f68;--latao:#c9962c;--latao-claro:#e8c266;--oxblood:#8c2420;--fosforo:#5fd38a;--linha:#3a3122;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--breu);color:var(--vela);
+  font-family:"IBM Plex Sans",Calibri,sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+header{border-bottom:3px double var(--latao);background:var(--madeira);padding:18px 0}
+h1{font-family:"Jost",Calibri,sans-serif;font-weight:500;font-size:24px;letter-spacing:.14em;
+  text-transform:uppercase;margin:0}
+.sub{color:var(--poeira);font-size:14px;margin:6px 0 0}
+h2{font-family:"Jost",Calibri,sans-serif;font-weight:500;font-size:18px;letter-spacing:.16em;
+  text-transform:uppercase;margin:0 0 14px;color:var(--latao-claro)}
+main{padding:28px 0 80px;display:grid;gap:26px}
+.cartao{background:var(--madeira);border:1px solid var(--linha);padding:22px;position:relative}
+.cartao::before{content:"";position:absolute;top:7px;left:7px;width:16px;height:16px;
+  border:1px solid var(--latao);border-right:0;border-bottom:0}
+label{display:block;font-family:"Jost",sans-serif;font-size:13px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--poeira);margin:14px 0 6px}
+input[type=text],select,textarea{
+  width:100%;background:var(--breu);border:1px solid var(--linha);color:var(--vela);
+  padding:11px 13px;font-family:inherit;font-size:15px}
+input:focus,select:focus{outline:2px solid var(--latao);border-color:var(--latao)}
+.linha2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.papeis{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.papeis label{display:flex;align-items:center;gap:8px;margin:0;padding:10px 14px;
+  border:1px solid var(--linha);cursor:pointer;letter-spacing:.1em;color:var(--osso);min-height:44px}
+.papeis label:has(input:checked){background:var(--latao);color:var(--breu);border-color:var(--latao-claro)}
+.papeis input{accent-color:var(--oxblood)}
+button{font-family:"Jost",sans-serif;font-size:14px;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--madeira-2);border:1px solid var(--latao);color:var(--vela);
+  padding:13px 24px;cursor:pointer;min-height:44px}
+button:hover{background:var(--latao);color:var(--breu)}
+button.principal{background:var(--latao);color:var(--breu);font-weight:600}
+button.principal:hover{background:var(--latao-claro)}
+button.perigo{border-color:var(--oxblood);color:var(--osso);padding:8px 12px;letter-spacing:.08em}
+button.perigo:hover{background:var(--oxblood);color:var(--vela)}
+.acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;align-items:center}
+.aviso{padding:12px 15px;border-left:1px solid var(--latao);background:rgba(201,150,44,.06);
+  color:var(--osso);font-size:14.5px;margin:0 0 18px}
+.ok{color:var(--fosforo)}
+.erro{color:#e8826a}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th{text-align:left;font-family:"Jost",sans-serif;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--poeira);border-bottom:1px solid var(--linha);padding:8px 6px}
+td{border-bottom:1px solid var(--linha);padding:10px 6px;vertical-align:middle}
+td img{width:96px;aspect-ratio:16/9;object-fit:cover;display:block;background:#000;border:1px solid var(--linha)}
+.vazio{color:var(--poeira);padding:20px 0}
+code{background:var(--breu);padding:2px 6px;border:1px solid var(--linha);font-size:13px}
+.passos{color:var(--osso);font-size:15px;padding-left:20px;margin:0}
+.passos li{margin-bottom:8px}
+@media(max-width:620px){.linha2{grid-template-columns:1fr}td img{width:64px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Adicionar ao portfólio</h1>
+    <p class="sub">Cole o link, preencha e baixe o arquivo. Sem mexer em código.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="cartao">
+    <h2>Novo trabalho</h2>
+    <p class="aviso">Serve pra <strong>YouTube</strong> (qualquer canal) e <strong>Google Drive</strong>.
+    Vídeo do Drive precisa estar compartilhado como "qualquer pessoa com o link", senão o player abre preto.</p>
+
+    <label for="url">Link do vídeo</label>
+    <input type="text" id="url" placeholder="https://youtu.be/XXXXXXXXXXX  ou  https://drive.google.com/file/d/XXXX/view">
+    <p id="detectado" class="sub"></p>
+
+    <label for="titulo">Título (como vai aparecer no site)</label>
+    <input type="text" id="titulo" placeholder="Ex.: Cobertura do Festival de Ilhéus 2026">
+
+    <div class="linha2">
+      <div>
+        <label for="categoria">Categoria</label>
+        <input type="text" id="categoria" list="cats" placeholder="Ex.: Documentário">
+        <datalist id="cats"></datalist>
+      </div>
+      <div>
+        <label for="duracao">Duração (opcional)</label>
+        <input type="text" id="duracao" placeholder="Ex.: 12:40">
+      </div>
+    </div>
+
+    <label>Seu papel</label>
+    <div class="papeis">
+      <label><input type="checkbox" value="gravei" checked> Câmera</label>
+      <label><input type="checkbox" value="editei" checked> Edição</label>
+      <label><input type="checkbox" value="vivo"> Ao vivo</label>
+      <label><input type="checkbox" value="partic"> Participação</label>
+    </div>
+
+    <div class="papeis" style="margin-top:14px">
+      <label><input type="checkbox" id="destaque"> ★ Destaque (vai pro topo)</label>
+    </div>
+
+    <div class="acoes">
+      <button class="principal" id="add">Adicionar à lista</button>
+      <span id="msg" class="sub"></span>
+    </div>
+  </section>
+
+  <section class="cartao">
+    <h2>Lista atual (<span id="qtd">0</span>)</h2>
+    <p class="aviso">Aqui ficam só os trabalhos que você adicionou por esta página — os do canal da TV
+    vêm da <a href="triagem.html" style="color:var(--latao-claro)">triagem</a> e não aparecem nesta tabela.</p>
+    <div id="tabela"></div>
+    <div class="acoes">
+      <button class="principal" id="baixar">Baixar extras.json</button>
+      <button id="importar">Carregar arquivo existente</button>
+      <input type="file" id="arquivo" accept=".json" hidden>
+    </div>
+  </section>
+
+  <section class="cartao">
+    <h2>O que fazer com o arquivo baixado</h2>
+    <ol class="passos">
+      <li>O download vem como <code>extras.json</code>.</li>
+      <li>Substitua o arquivo <code>data/extras.json</code> dentro da pasta do site por esse.</li>
+      <li>No terminal, dentro da pasta: <code>bash scripts/publicar.sh "trabalhos novos"</code></li>
+      <li>Em ~1 minuto aparece em <code>raulvirgylio.github.io/portfolio</code>.</li>
+    </ol>
+    <p class="aviso" style="margin:18px 0 0">Para <strong>fotos</strong>, use o script:
+    <code>bash scripts/adicionar-fotos.sh "E:/pasta/com/fotos" "Nome do álbum"</code> — ele converte,
+    redimensiona e registra tudo sozinho.</p>
+  </section>
+
+</main>
+
+<script>
+const KEY = "raulzito_extras_v1";
+let itens = JSON.parse(localStorage.getItem(KEY) || "[]");
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const escId = s => String(s).replace(/[^A-Za-z0-9_-]/g, "");
+
+/* Extrai id e fonte de qualquer formato de link do YouTube ou Drive */
+function lerLink(url) {
+  url = String(url).trim();
+  if (!url) return null;
+  let m;
+  if ((m = url.match(/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]+)/))) return { fonte: "drive", id: m[1] };
+  if ((m = url.match(/drive\.google\.com\/open\?id=([A-Za-z0-9_-]+)/))) return { fonte: "drive", id: m[1] };
+  if ((m = url.match(/youtu\.be\/([A-Za-z0-9_-]{11})/))) return { fonte: "youtube", id: m[1] };
+  if ((m = url.match(/[?&]v=([A-Za-z0-9_-]{11})/))) return { fonte: "youtube", id: m[1] };
+  if ((m = url.match(/youtube\.com\/(?:embed|live|shorts)\/([A-Za-z0-9_-]{11})/))) return { fonte: "youtube", id: m[1] };
+  if (/^[A-Za-z0-9_-]{11}$/.test(url)) return { fonte: "youtube", id: url };
+  return null;
+}
+
+function thumb(it) {
+  return it.fonte === "drive"
+    ? `https://drive.google.com/thumbnail?id=${escId(it.id)}&sz=w640`
+    : `https://i.ytimg.com/vi/${escId(it.id)}/mqdefault.jpg`;
+}
+
+$("#url").addEventListener("input", () => {
+  const r = lerLink($("#url").value);
+  const el = $("#detectado");
+  if (!$("#url").value.trim()) { el.textContent = ""; return; }
+  el.innerHTML = r
+    ? `<span class="ok">Reconhecido: ${r.fonte === "drive" ? "Google Drive" : "YouTube"} — ID ${esc(r.id)}</span>`
+    : `<span class="erro">Não reconheci esse link. Cole o endereço completo do vídeo.</span>`;
+});
+
+$("#add").addEventListener("click", () => {
+  const r = lerLink($("#url").value);
+  const titulo = $("#titulo").value.trim();
+  const msg = $("#msg");
+  if (!r) { msg.innerHTML = '<span class="erro">Link inválido.</span>'; return; }
+  if (!titulo) { msg.innerHTML = '<span class="erro">Falta o título.</span>'; return; }
+  if (itens.some(i => i.id === r.id)) { msg.innerHTML = '<span class="erro">Esse vídeo já está na lista.</span>'; return; }
+
+  const papeis = [...document.querySelectorAll(".papeis input[type=checkbox]")]
+    .filter(c => c.checked && c.value).map(c => c.value);
+
+  itens.push({
+    id: r.id, fonte: r.fonte, titulo,
+    categoria: $("#categoria").value.trim() || "Outros",
+    dur_fmt: $("#duracao").value.trim(),
+    views: 0, papeis, destaque: $("#destaque").checked,
+  });
+  salvar();
+  $("#url").value = ""; $("#titulo").value = ""; $("#duracao").value = "";
+  $("#detectado").textContent = ""; $("#destaque").checked = false;
+  msg.innerHTML = '<span class="ok">Adicionado. Não esqueça de baixar o arquivo no fim.</span>';
+});
+
+function salvar() { localStorage.setItem(KEY, JSON.stringify(itens)); pintar(); }
+
+function pintar() {
+  $("#qtd").textContent = itens.length;
+  const cats = [...new Set(itens.map(i => i.categoria))];
+  $("#cats").innerHTML = ["Documentário","Reportagem","Cobertura","Institucional","Vinhetas","Especiais", ...cats]
+    .filter((v,i,a) => v && a.indexOf(v) === i).map(c => `<option value="${esc(c)}">`).join("");
+
+  if (!itens.length) { $("#tabela").innerHTML = '<p class="vazio">Nada adicionado ainda.</p>'; return; }
+  $("#tabela").innerHTML = `<table><thead><tr>
+      <th></th><th>Título</th><th>Categoria</th><th>Papel</th><th></th>
+    </tr></thead><tbody>${itens.map((i, n) => `
+      <tr>
+        <td><img loading="lazy" src="${thumb(i)}" alt="" referrerpolicy="no-referrer"></td>
+        <td>${i.destaque ? "★ " : ""}${esc(i.titulo)}<br><span class="sub">${esc(i.fonte)} · ${esc(i.id)}</span></td>
+        <td>${esc(i.categoria)}</td>
+        <td>${(i.papeis||[]).map(esc).join(", ")}</td>
+        <td><button class="perigo" data-rm="${n}">Remover</button></td>
+      </tr>`).join("")}</tbody></table>`;
+  $("#tabela").querySelectorAll("[data-rm]").forEach(b =>
+    b.addEventListener("click", () => { itens.splice(Number(b.dataset.rm), 1); salvar(); }));
+}
+
+$("#baixar").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(itens, null, 1)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "extras.json"; a.click();
+});
+
+$("#importar").addEventListener("click", () => $("#arquivo").click());
+$("#arquivo").addEventListener("change", async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const arr = JSON.parse(await f.text());
+    if (!Array.isArray(arr)) throw new Error("formato");
+    itens = arr.filter(i => i && i.id);
+    salvar();
+    $("#msg").innerHTML = `<span class="ok">${itens.length} item(ns) carregados do arquivo.</span>`;
+  } catch (err) {
+    $("#msg").innerHTML = '<span class="erro">Arquivo inválido — precisa ser o extras.json.</span>';
+  }
+});
+
+// primeira abertura: puxa o extras.json que já está publicado
+(async () => {
+  if (!itens.length) {
+    try {
+      const arr = await fetch("data/extras.json").then(r => r.ok ? r.json() : []);
+      if (Array.isArray(arr) && arr.length) { itens = arr; localStorage.setItem(KEY, JSON.stringify(itens)); }
+    } catch (e) { /* offline ou aberto solto: segue vazio */ }
+  }
+  pintar();
+})();
+</script>
+</body>
+</html>

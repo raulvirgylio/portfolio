@@ -64,6 +64,32 @@ Depois abra no navegador:
 
 ## Fluxo de trabalho
 
+### Adicionar trabalhos (vídeo)
+
+Abra **`adicionar.html`** pelo servidor local: <http://localhost:8777/adicionar.html>
+
+Cole o link do YouTube ou do Google Drive, preencha título/categoria, marque seu papel,
+clique em **Adicionar à lista** e no fim em **Baixar extras.json**. Substitua
+`data/extras.json` por esse download e publique. A página reconhece qualquer formato de link
+(`youtu.be/...`, `watch?v=...`, `/shorts/`, `/live/`, link do Drive) e já vem carregada com o que
+está publicado.
+
+### Adicionar fotos
+
+```
+bash scripts/adicionar-fotos.sh "E:/FLI 2026/07_FOTOS/Fotos_iPhone" "FLI 2026"
+```
+
+Primeiro argumento é a pasta (ou um arquivo só), segundo é o álbum — que vira filtro na aba Fotos.
+Aceita JPG, PNG, WEBP e **HEIC do iPhone** (converte, porque navegador não abre HEIC e respeita a
+rotação do celular). Gera a versão grande e a miniatura, registra em `data/fotos.json` e pula o que
+já tinha importado. Rode quantas vezes quiser, com álbuns diferentes.
+
+Legendas são opcionais: abra `data/fotos.json` e preencha `"legenda"` e `"local"` das que merecerem.
+A aba Fotos some sozinha do site enquanto não houver nenhuma foto.
+
+### Triagem do acervo da TV
+
 1. **Triagem** — abra `triagem.html`. Estão lá os 412 vídeos do canal da TV Conexões.
    Em cada um marque seu papel:
 

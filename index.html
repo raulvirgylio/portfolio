@@ -21,6 +21,7 @@
     <a class="brand" href="#">Raulzito</a>
     <nav>
       <a href="#trabalhos">Portfólio</a>
+      <a href="#fotos" id="nav-fotos" hidden>Fotos</a>
       <a href="#sobre">Sobre mim</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -42,10 +43,25 @@
       <p class="lede">Captação em locação — entrevista, povo-fala e b-roll — com finalização em
       <strong>DaVinci Resolve</strong>. Programas de TV, documentários e coberturas de evento.
       Abaixo, os trabalhos publicados.</p>
-      <dl class="facts">
-        <div><dt>Peças</dt><dd id="f-total">—</dd></div>
-        <div><dt>Programas</dt><dd id="f-cats">—</dd></div>
-      </dl>
+      <div class="monograma" aria-hidden="true">
+        <svg viewBox="0 0 200 200" role="img">
+          <g fill="none" stroke="currentColor" stroke-linecap="butt" stroke-miterlimit="10">
+            <!-- moldura: dois anéis e losangos nas diagonais -->
+            <circle cx="100" cy="100" r="88" stroke-width="2"/>
+            <circle cx="100" cy="100" r="80" stroke-width="1" opacity=".5"/>
+            <!-- asas laterais (déco) -->
+            <path d="M4 100 h22 M174 100 h22" stroke-width="2"/>
+            <path d="M10 94 h10 M180 94 h10 M10 106 h10 M180 106 h10" stroke-width="1" opacity=".7"/>
+            <!-- R geométrico -->
+            <path d="M72 148 V54 h38 a24 24 0 0 1 0 48 H72" stroke-width="9"/>
+            <path d="M104 102 l34 46" stroke-width="9"/>
+          </g>
+          <g fill="currentColor">
+            <rect x="96" y="14" width="8" height="8" transform="rotate(45 100 18)"/>
+            <rect x="96" y="178" width="8" height="8" transform="rotate(45 100 182)"/>
+          </g>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -61,6 +77,20 @@
   <div class="grid" id="grid"></div>
   <p class="loadmore-wrap"><button id="loadmore" class="btn">Ver mais sessões</button></p>
 </main>
+
+<section id="fotos" class="faixa-fotos" hidden>
+  <div class="wrap">
+    <div class="toolbar">
+      <h2>Fotos</h2>
+      <div class="deco-rule" style="max-width:380px;margin-left:auto;margin-right:auto">
+        <span class="losango"></span>
+      </div>
+      <div class="filters" id="filtros-fotos"></div>
+    </div>
+    <div class="grid-fotos" id="grid-fotos"></div>
+    <p class="loadmore-wrap"><button id="loadmore-fotos" class="btn">Ver mais fotos</button></p>
+  </div>
+</section>
 
 <section id="sobre" class="band">
   <div class="wrap about">
@@ -106,7 +136,6 @@
       <li><a id="lk-wa" href="#" data-ph="WhatsApp">WhatsApp</a></li>
       <li><a id="lk-ig" href="#" data-ph="Instagram">Instagram</a></li>
       <li><a id="lk-mail" href="#" data-ph="E-mail">E-mail</a></li>
-      <li><a href="https://www.youtube.com/@TVCONEXOESAESTACAODOSABER" target="_blank" rel="noopener">Canal TV Conexões</a></li>
     </ul>
   </div>
   <div class="wrap">
@@ -122,6 +151,14 @@
   <button class="fechar" aria-label="Fechar">✕</button>
   <div class="frame"><iframe id="iframe" title="Player" allow="accelerometer;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe></div>
   <p class="player-tit" id="player-tit"></p>
+</dialog>
+
+<dialog id="lightbox">
+  <button class="fechar" aria-label="Fechar">✕</button>
+  <button class="nav-foto ant" aria-label="Foto anterior">‹</button>
+  <button class="nav-foto prox" aria-label="Próxima foto">›</button>
+  <div class="frame-foto"><img id="foto-grande" alt=""></div>
+  <p class="player-tit" id="foto-legenda"></p>
 </dialog>
 
 <script src="assets/app.js"></script>
