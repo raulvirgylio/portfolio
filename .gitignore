@@ -1,3 +1,19 @@
 .DS_Store
 Thumbs.db
 
+# temporários dos scripts
+.tmp-*
+
+# ─────────────────────────────────────────────────────────────
+# TRAVA DE FOTOS — nenhuma foto vai ao ar sem autorização.
+# O publicar.sh faz "git add -A"; sem estas linhas ele subiria
+# tudo que estivesse em assets/fotos/ sem perguntar nada.
+#
+# Quando você escolher as fotos e quiser publicar:
+#   1. deixe em assets/fotos/ só as aprovadas
+#   2. apague as duas linhas abaixo deste comentário
+#   3. bash scripts/publicar.sh "fotos selecionadas"
+# ─────────────────────────────────────────────────────────────
+assets/fotos/
+data/fotos.json
+

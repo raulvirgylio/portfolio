@@ -271,6 +271,14 @@ a{color:var(--latao-claro)}
   font-size:13px;letter-spacing:.04em;text-align:left;opacity:0;transition:opacity .25s;
 }
 .foto:hover .legenda,.foto:focus-visible .legenda{opacity:1}
+/* estado vazio da aba de fotos */
+.vazio-fotos{
+  grid-column:1/-1;text-align:center;color:var(--osso);margin:0;
+  padding:52px 24px;border:1px dashed var(--linha);background:rgba(7,16,14,.35);
+  font-family:"Jost",Calibri,sans-serif;font-size:19px;letter-spacing:.1em;text-transform:uppercase;
+}
+.vazio-fotos span{display:block;margin-top:12px;color:var(--poeira);font-size:14px;
+  letter-spacing:.14em;text-transform:none}
 
 /* lightbox */
 #lightbox{

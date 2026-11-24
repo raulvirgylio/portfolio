@@ -135,6 +135,14 @@ function pintarFiltrosFoto() {
 
 function pintarFotos() {
   const l = listaFotos(), vis = l.slice(0, mostrandoFotos);
+  if (!l.length) {
+    // aba existe mas ainda sem seleção — estado vazio explícito, não seção quebrada
+    $("#grid-fotos").innerHTML = `<p class="vazio-fotos">
+      Seleção de fotos em andamento.<br>
+      <span>Em breve: cobertura de evento, bastidor e retrato em locação.</span></p>`;
+    $("#loadmore-fotos").hidden = true;
+    return;
+  }
   $("#grid-fotos").innerHTML = vis.map((f, i) => `
     <button class="foto" data-i="${i}">
       <span class="canto c1"></span><span class="canto c2"></span>
@@ -162,8 +170,7 @@ function fecharFoto() { $("#lightbox").close(); $("#foto-grande").src = ""; }
 async function carregarFotos() {
   const f = await fetch("data/fotos.json").then(r => r.ok ? r.json() : []).catch(() => []);
   fotos = Array.isArray(f) ? f.filter(x => x && x.arquivo) : [];
-  // sem fotos, a aba inteira some em vez de mostrar seção vazia
-  if (!fotos.length) return;
+  // A aba fica sempre visível; pintarFotos() cuida do estado vazio.
   $("#fotos").hidden = false;
   $("#nav-fotos").hidden = false;
   pintarFiltrosFoto(); pintarFotos();
